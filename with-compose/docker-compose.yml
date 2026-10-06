@@ -11,7 +11,7 @@ name: funapp-devbox
 services:
   dev:
     build:
-      context: https://github.com/mymyanmarland/funapp-dev-container.git
+      context: https://github.com/mymyanmarland/funapp-devbox.git
       dockerfile: Dockerfile
     ports:
       - "8800:80"    # dashboard (nginx)
