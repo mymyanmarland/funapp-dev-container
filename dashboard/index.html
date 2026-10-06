@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funapp DevBox</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; background: #f5f6f8; color: #1c1e21; padding: 40px 20px; }
+  .card { max-width: 640px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 36px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .logo-mark { width: 44px; height: 44px; border-radius: 12px; background: #e11d2e; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 24px; }
+  h1 { font-size: 24px; }
+  p.sub { color: #65676b; margin: 6px 0 24px; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 10px 4px; border-bottom: 1px solid #eef0f2; font-size: 15px; }
+  td:first-child { width: 44px; font-size: 20px; }
+  code { background: #f0f2f5; padding: 2px 8px; border-radius: 6px; font-size: 13px; }
+  .foot { margin-top: 24px; color: #65676b; font-size: 13px; }
+  .foot a { color: #e11d2e; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <div class="logo-mark">F</div>
+    <h1>Funapp DevBox</h1>
+  </div>
+  <p class="sub">All-in-one development environment — ready to code.</p>
+  <table>
+    <tr><td>🐘</td><td><strong>PostgreSQL 16</strong> — <code>localhost:5432</code><br><span style="color:#65676b;font-size:13px">user <code>dev</code> / password <code>dev</code> / db <code>devdb</code></span></td></tr>
+    <tr><td>🔴</td><td><strong>Redis 7</strong> — <code>localhost:6379</code></td></tr>
+    <tr><td>💻</td><td><strong>Node 22</strong> — npm · pnpm · yarn · pm2 · typescript</td></tr>
+    <tr><td>🐍</td><td><strong>Python 3</strong> — pip · venv · gunicorn · flask</td></tr>
+    <tr><td>🌐</td><td><strong>nginx</strong> — this dashboard on <code>:80</code></td></tr>
+    <tr><td>🛠️</td><td><strong>Tools</strong> — git · gh · zsh + oh-my-zsh</td></tr>
+  </table>
+  <p class="foot">Stacks: Next.js 16 + Prisma · Express 5 + Drizzle · React 19 + Vite · Flask + gunicorn<br>
+  Built by <a href="https://github.com/mymyanmarland/funapp-dev-container">Funapp</a> · MIT License</p>
+</div>
+</body>
+</html>
