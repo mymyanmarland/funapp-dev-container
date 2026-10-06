@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/mymyanmarland/funapp-dev-container?style=flat-square" alt="MIT"></a>
-  <img src="https://img.shields.io/github/stars/mymyanmarland/funapp-dev-container?style=flat-square" alt="stars">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/mymyanmarland/funapp-devbox?style=flat-square" alt="MIT"></a>
+  <img src="https://img.shields.io/github/stars/mymyanmarland/funapp-devbox?style=flat-square" alt="stars">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs welcome">
   <img src="https://img.shields.io/badge/docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white" alt="docker ready">
   <img src="https://img.shields.io/badge/vscode-devcontainer-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white" alt="vscode devcontainer">
@@ -52,7 +52,7 @@
 # 1. Add the DevBox config to your project
 mkdir -p .devcontainer
 curl -o .devcontainer/devcontainer.json \
-  https://raw.githubusercontent.com/mymyanmarland/funapp-dev-container/main/.devcontainer/devcontainer.json
+  https://raw.githubusercontent.com/mymyanmarland/funapp-devbox/main/.devcontainer/devcontainer.json
 
 # 2. Open your project
 code .
