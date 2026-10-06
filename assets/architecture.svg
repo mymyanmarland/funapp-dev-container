@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 400" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .flow { fill: none; stroke: #e11d2e; stroke-width: 2; stroke-dasharray: 7 7; opacity: .75; animation: dash 1.1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -28; } }
+    .pulse { animation: pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+    .node { fill: #161b22; stroke: #30363d; stroke-width: 1.5; }
+    .node-red { fill: #161b22; stroke: #e11d2e; stroke-width: 2; }
+    .title { fill: #f0f6fc; font-size: 17px; font-weight: 700; }
+    .sub { fill: #8b949e; font-size: 12.5px; }
+    .svc { fill: #f0f6fc; font-size: 14px; font-weight: 600; }
+    .svc-sub { fill: #8b949e; font-size: 11.5px; }
+    .dot { fill: #3fb950; }
+    .emoji { font-size: 22px; }
+  </style>
+
+  <!-- VS Code -->
+  <rect class="node" x="20" y="150" width="150" height="100" rx="12"/>
+  <text x="95" y="192" text-anchor="middle" class="emoji">💻</text>
+  <text x="95" y="218" text-anchor="middle" class="title">VS Code</text>
+  <text x="95" y="238" text-anchor="middle" class="sub">Dev Container</text>
+
+  <!-- arrow into box -->
+  <path class="flow" d="M170 200 H225"/>
+
+  <!-- DevBox container -->
+  <rect class="node-red" x="225" y="40" width="240" height="320" rx="14"/>
+  <text x="345" y="80" text-anchor="middle" class="emoji">📦</text>
+  <text x="345" y="108" text-anchor="middle" class="title">Funapp DevBox</text>
+  <text x="345" y="130" text-anchor="middle" class="sub">Ubuntu 24.04 · all services auto-start</text>
+
+  <text x="255" y="168" class="sub">▸ zsh + oh-my-zsh</text>
+  <text x="255" y="192" class="sub">▸ git · gh · curl</text>
+  <text x="255" y="216" class="sub">▸ pm2 · typescript</text>
+  <text x="255" y="240" class="sub">▸ prettier · eslint</text>
+  <text x="255" y="264" class="sub">▸ pip · venv</text>
+  <text x="255" y="300" class="sub">your code →</text>
+  <text x="255" y="322" class="svc">/workspaces/&lt;app&gt;</text>
+
+  <!-- flows to services -->
+  <path class="flow" d="M465 120 C 520 120, 520 70, 575 70"/>
+  <path class="flow" d="M465 160 C 530 160, 530 130, 575 130"/>
+  <path class="flow" d="M465 200 H575"/>
+  <path class="flow" d="M465 240 C 530 240, 530 300, 575 300"/>
+  <path class="flow" d="M465 280 C 520 280, 520 350, 575 350"/>
+
+  <!-- service chips -->
+  <g>
+    <rect class="node" x="575" y="42" width="225" height="56" rx="10"/>
+    <circle class="dot pulse" cx="597" cy="70" r="6"/>
+    <text x="614" y="66" class="svc">Node 22</text>
+    <text x="614" y="84" class="svc-sub">npm · pnpm · yarn</text>
+  </g>
+  <g>
+    <rect class="node" x="575" y="106" width="225" height="56" rx="10"/>
+    <circle class="dot pulse" cx="597" cy="134" r="6" style="animation-delay:.4s"/>
+    <text x="614" y="130" class="svc">Python 3</text>
+    <text x="614" y="148" class="svc-sub">gunicorn · flask</text>
+  </g>
+  <g>
+    <rect class="node" x="575" y="172" width="225" height="56" rx="10"/>
+    <circle class="dot pulse" cx="597" cy="200" r="6" style="animation-delay:.8s"/>
+    <text x="614" y="196" class="svc">PostgreSQL 16</text>
+    <text x="614" y="214" class="svc-sub">dev / devdb :5432</text>
+  </g>
+  <g>
+    <rect class="node" x="575" y="272" width="225" height="56" rx="10"/>
+    <circle class="dot pulse" cx="597" cy="300" r="6" style="animation-delay:1.2s"/>
+    <text x="614" y="296" class="svc">Redis 7</text>
+    <text x="614" y="314" class="svc-sub">localhost:6379</text>
+  </g>
+  <g>
+    <rect class="node" x="575" y="322" width="225" height="56" rx="10"/>
+    <circle class="dot pulse" cx="597" cy="350" r="6" style="animation-delay:1.6s"/>
+    <text x="614" y="346" class="svc">nginx</text>
+    <text x="614" y="364" class="svc-sub">dashboard :80</text>
+  </g>
+</svg>
