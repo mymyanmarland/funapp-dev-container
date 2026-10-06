@@ -7,7 +7,6 @@
 #   Stack 5 — Flask / FastAPI + gunicorn + nginx + PostgreSQL
 #
 # Designed primarily for VS Code Dev Containers.
-# Inspired by the dev-container pattern (eimg/fairway-dev-container).
 
 FROM ubuntu:24.04
 
