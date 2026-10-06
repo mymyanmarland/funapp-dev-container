@@ -26,7 +26,7 @@
   <img src="assets/architecture.svg" alt="Funapp DevBox architecture" width="720">
 </p>
 
-## ✨ What's inside
+## ✨ What's inside the box
 
 | | Component | Version | Notes |
 |---|---|---|---|
@@ -38,7 +38,16 @@
 | 🌐 | nginx | latest | dashboard on `:80`, reverse-proxy examples included |
 | 🛠️ | Tools | — | git · gh · curl · nano · tree |
 
-**Covers every Funapp stack** — Stack 1 (Next.js 16 + Prisma) · Stack 2 (Express 5 + Drizzle + React 19) · Stack 4 (Vite + Tailwind v4) · Stack 5 (Flask + gunicorn)
+## 🧱 Supported stacks
+
+| Stack | What it is | When to use it | Ready in the box |
+|---|---|---|---|
+| **Stack 1** | Next.js 16 + Prisma + TypeScript | Full web app, one codebase (frontend + backend together) | Node 22 · PostgreSQL · Prisma CLI via npx |
+| **Stack 2** | Express 5 + TypeScript + Drizzle (API) + React 19 + Vite (frontend) | Separate backend API + frontend | Node 22 · PostgreSQL · Redis · Drizzle Kit via npx |
+| **Stack 4** | React 19 + Vite + Tailwind CSS v4 | Frontend only, fast interactive UI | Node 22 · Vite via npm |
+| **Stack 5** | Flask + gunicorn + nginx + PostgreSQL | Python web app / API | Python 3 · gunicorn · nginx · PostgreSQL |
+
+> **Which one do I pick?** One codebase and want it simple → **Stack 1**. Need a separate API (mobile app later, etc.) → **Stack 2**. Only a beautiful frontend → **Stack 4**. You prefer Python → **Stack 5**.
 
 ## 🚀 Quick start
 
@@ -57,7 +66,7 @@ curl -o .devcontainer/devcontainer.json \
 # 2. Open your project
 code .
 
-# 3. Command Palette → "Dev Containers: Reopen in Container"
+# 3. Command Palette (Ctrl+Shift+P) → "Dev Containers: Reopen in Container"
 
 # 4. Done! 🎉 PostgreSQL, Redis & nginx start automatically.
 ```
@@ -91,45 +100,115 @@ Or copy [`with-compose/docker-compose.yml`](with-compose/docker-compose.yml) int
 
 </details>
 
-## 📋 Stack recipes
+## 📋 Stack guides — how to use each one
 
-<details>
-<summary><b>Stack 1 — Next.js 16 + Prisma</b></summary>
+> All commands below run **inside the DevBox** (the container terminal). The database is already running — just point your `DATABASE_URL` at it:
+> ```
+> DATABASE_URL="postgresql://dev:dev@localhost:5432/devdb"
+> ```
+
+<details open>
+<summary><b>Stack 1 — Next.js 16 + Prisma</b> · full web app in one codebase</summary>
+<br>
 
 ```bash
-npx create-next-app@latest my-app && cd my-app
-npx prisma init   # DATABASE_URL="postgresql://dev:dev@localhost:5432/devdb"
-npm run dev       # → http://localhost:3000
+# 1. Create the app
+npx create-next-app@latest my-app
+cd my-app
+
+# 2. Set up the database (already running in the box)
+npx prisma init
+# → edit .env: DATABASE_URL="postgresql://dev:dev@localhost:5432/devdb"
+# → edit prisma/schema.prisma: add your models
+
+# 3. Create tables
+npx prisma migrate dev --name init
+
+# 4. Run it
+npm run dev
+# → open http://localhost:3000 🎉
 ```
+
+Use for: admin panels, shops, dashboards — anything where frontend + backend live together.
 </details>
 
 <details>
-<summary><b>Stack 2 — Express 5 + Drizzle</b></summary>
+<summary><b>Stack 2 — Express 5 API + Drizzle</b> · separate backend</summary>
+<br>
 
 ```bash
-npm init -y && npm i express drizzle-orm pg && npm i -D typescript @types/express @types/node drizzle-kit tsx
-# DATABASE_URL="postgresql://dev:dev@localhost:5432/devdb"
-npx tsx src/index.ts   # → http://localhost:4000
+# 1. Scaffold
+mkdir my-api && cd my-api
+npm init -y
+npm i express drizzle-orm pg
+npm i -D typescript @types/express @types/node @types/pg drizzle-kit tsx
+
+# 2. .env file:
+DATABASE_URL="postgresql://dev:dev@localhost:5432/devdb"
+
+# 3. Write src/index.ts (Express app) + src/schema.ts (Drizzle tables), then:
+npx drizzle-kit generate
+npx drizzle-kit migrate
+
+# 4. Run it
+npx tsx src/index.ts
+# → API live at http://localhost:4000 🎉
 ```
+
+**Stack 2 frontend** (React 19 + Vite) — same steps as Stack 4 below, calling your API at `http://localhost:4000`.
+
+Use for: backends that serve a mobile app or a separate frontend later.
 </details>
 
 <details>
-<summary><b>Stack 4 — Vite React</b></summary>
+<summary><b>Stack 4 — React 19 + Vite + Tailwind v4</b> · frontend only</summary>
+<br>
 
 ```bash
-npm create vite@latest my-app -- --template react-ts && cd my-app
-npm i && npm run dev -- --host 0.0.0.0   # → http://localhost:3000
+# 1. Scaffold
+npm create vite@latest my-app -- --template react-ts
+cd my-app
+npm i
+
+# 2. Tailwind v4
+npm i -D tailwindcss @tailwindcss/vite
+# → vite.config.ts: import tailwindcss from '@tailwindcss/vite' and add tailwindcss() to plugins
+# → src/index.css: add `@import "tailwindcss";` at the top
+
+# 3. Run it (0.0.0.0 so the host browser can reach it)
+npm run dev -- --host 0.0.0.0
+# → open http://localhost:3000 🎉
 ```
+
+Deploying? `npm run build` → serve the `dist/` folder with nginx (no Node server needed).
 </details>
 
 <details>
-<summary><b>Stack 5 — Flask + gunicorn</b></summary>
+<summary><b>Stack 5 — Flask + gunicorn</b> · Python web app</summary>
+<br>
 
 ```bash
-python3 -m venv venv && source venv/bin/activate
-pip install flask
-gunicorn -b 127.0.0.1:5000 app:app   # → http://localhost:5000
+# 1. Virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# 2. Install
+pip install flask psycopg2-binary
+
+# 3. Write app.py, e.g.:
+#    from flask import Flask
+#    app = Flask(__name__)
+#    @app.route("/")
+#    def hello(): return "Hello from DevBox!"
+
+# 4. Run with gunicorn (production-grade, like the VPS)
+gunicorn -b 127.0.0.1:5000 app:app
+# → open http://localhost:5000 🎉
 ```
+
+Want nginx in front (like production)? Uncomment the `/app/` example in `nginx/nginx.conf`.
+
+Use for: Python APIs, data tools, anything where Python libraries matter.
 </details>
 
 ## 🔧 Customization
