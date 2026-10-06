@@ -103,6 +103,12 @@ gunicorn -b 127.0.0.1:5000 app:app
 
 ## Customization
 
+**Verify files before building** (same checks CI would run):
+```bash
+python3 -m json.tool .devcontainer/devcontainer.json > /dev/null
+bash -n scripts/entrypoint.sh && bash -n scripts/service-setup.sh
+```
+
 **Change port mapping** — edit `runArgs` in `.devcontainer/devcontainer.json`:
 ```json
 "runArgs": ["-p", "8800:80", "-e", "MY_VAR=value"]
