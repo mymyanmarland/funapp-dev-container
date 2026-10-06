@@ -1,0 +1,11 @@
+# Funapp DevBox local ignores
+node_modules/
+dist/
+.next/
+.env
+.env.local
+pgdata/
+redis-data/
+mysql-data/
+*.log
+.DS_Store
