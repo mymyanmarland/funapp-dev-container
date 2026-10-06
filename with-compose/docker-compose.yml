@@ -1,0 +1,30 @@
+# Funapp DevBox — docker compose variant.
+#
+# Copy this file into your project as `docker-compose.yml`, then:
+#   docker compose up -d
+#
+# It builds the DevBox image and mounts your project at /workspaces/app.
+# Data persists in named volumes (pgdata, redisdata).
+
+name: funapp-devbox
+
+services:
+  dev:
+    build:
+      context: https://github.com/mymyanmarland/funapp-dev-container.git
+      dockerfile: Dockerfile
+    ports:
+      - "8800:80"    # dashboard (nginx)
+      - "3000:3000"  # Next.js / Vite
+      - "4000:4000"  # Express API
+      - "5000:5000"  # Flask / gunicorn
+    volumes:
+      - .:/workspaces/app
+      - pgdata:/postgres/data
+      - redisdata:/redis/data
+    stdin_open: true
+    tty: true
+
+volumes:
+  pgdata:
+  redisdata:
